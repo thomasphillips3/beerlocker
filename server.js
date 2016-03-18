@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require ('mongoose');
 var bodyParser = require('body-parser');
 var beerController = require('./controllers/beer');
+var userController = require('./controllers/user');
 var Beer = require('./models/beer');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -23,6 +24,10 @@ router.route('/beers/:beer_id')
   .get(beerController.getBeer)
   .put(beerController.putBeer)
   .delete(beerController.deleteBeer);
+
+router.route('/users')
+  .post(userController.postUsers)
+  .get(userController.getUsers);
 
 app.use('/api', router);
 app.listen(port);
