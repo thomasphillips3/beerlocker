@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require ('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var clientController = require('./controllers/client');
 var beerController = require('./controllers/beer');
 var userController = require('./controllers/user');
 var authController = require('./controllers/auth');
@@ -31,6 +32,10 @@ router.route('/beers/:beer_id')
 router.route('/users')
   .post(userController.postUsers)
   .get(authController.isAuthenticated, userController.getUsers);
+
+router.route('/clients')
+  .post(authController.isAuthenticated, clientController.postClients)
+  .get(authController.isAuthenticated, clientController.getClients);
 
 app.use('/api', router);
 app.listen(port);
