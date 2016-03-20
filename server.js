@@ -1,23 +1,23 @@
 var express = require('express');
 var mongoose = require ('mongoose');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 var beerController = require('./controllers/beer');
 var userController = require('./controllers/user');
-var Beer = require('./models/beer');
-var passport = require('passport');
 var authController = require('./controllers/auth');
-var app = express();
-var port = process.env.PORT || 3000;
-var router = express.Router();
-var beersRoute = router.route('/beers');
-var beerRoute = router.route('/beers/:beer_id');
 
 mongoose.connect('mongodb://localhost:27017/beerlocker');
+
+var app = express();
 
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
 app.use(passport.initialize());
+
+var router = express.Router();
+var port = process.env.PORT || 3000;
 
 router.route('/beers')
   .post(authController.isAuthenticated, beerController.postBeers)
