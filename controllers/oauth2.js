@@ -67,27 +67,26 @@ exports.authorization = [
   function(req, res){
     res.render('dialog', { transactionID: req.oauth2.transactionID, user: req.user, client: req.oauth2.client });
   }
-]
+];
 
 exports.decision = [
   server.decision()
-]
+];
 
 exports.token = [
   server.token(),
   server.errorHandler()
-]
+];
 
 function uid (len) {
   var buf = []
-    , chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+    , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
     , charlen = chars.length;
 
-    for (var i=0; i<len; ++i) {
-      buf.push(chars[getRandomInt(0, charlen-1)]);
-    }
-
-    return buf.join('');
+  for (var i=0; i<len; ++i) {
+    buf.push(chars[getRandomInt(0, charlen-1)]);
+  }
+  return buf.join('');
 };
 
 function getRandomInt(min, max) {
